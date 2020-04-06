@@ -316,6 +316,7 @@
   - name: POSTINSTALL 14.0 | Create App Cert Configmap
     command: "oc create configmap custom-ca --from-file=ca-bundle.crt=certs/{{ oc_app_domain }}.pem -n openshift-config"
     # failed_when: "'already exists' not in result14.stderr"  # use this when run multiple times
+    ignore_errors: true
     register: result14
     tags:
       - "14"
@@ -335,6 +336,7 @@
   - name: POSTINSTALL 17.0 | Create the Certificate Secret
     command: "oc create secret tls {{ oc_app_domain }}.com  --cert=certs/{{ oc_app_domain }}.pem --key=certs/{{ oc_app_domain }}.key -n openshift-ingress"
     # failed_when: "'already exists' not in result17.stderr"  # use this when run multiple times
+    ignore_errors: true
     register: result17
     tags:
       - "17"
@@ -348,6 +350,7 @@
   - name: POSTINSTALL 19.0 | Create the API Certificate
     command: "oc create secret tls {{ oc_api_domain }} --cert=certs/{{ oc_api_domain }}.pem --key=certs/{{ oc_api_domain }}.key -n openshift-config"
     # failed_when: "'already exists' not in result19.stderr"  # use this when run multiple times
+    ignore_errors: true
     register: result19
     tags:
       - "19"
