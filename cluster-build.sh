@@ -12,7 +12,7 @@ BUILD_LAB=gsslab
 rm -fr install-dir bin downloads
 mkdir -p {install-dir,bin,downloads}
 
-# Set the OCP version
+# Set the OCP Environment
 if [ "$1" != "--silent" ]; then
     printf "Specify Build Name (gsslab, pek2lab, <custom> ): (Press ENTER for default: ${BUILD_LAB})\n"
     read -r BUILD_LAB_CHOICE
@@ -79,7 +79,7 @@ fi
 printf "* OpenShift Container Storage (OCS) Setting: ${OCS_SETTING}\n\n"
 
 # Run Ansible setup-ocp-vsphere playbook:
-ansible-playbook -e "ocp_version=${DEFAULT_OCPVERSION} disconnected_setting=${DISCONNECTED}" -e @./vars/vars-${BUILD_LAB}.yml setup-ocp-vsphere.yml --vault-password-file=ocp4-vsphere-upi-automation-vault.yml --skip-tags=2
+ansible-playbook -e "ocp_version=${DEFAULT_OCPVERSION} disconnected_setting=${DISCONNECTED}" -e @./vars/vars-${BUILD_LAB}.yml setup-ocp-vsphere.yml --vault-password-file=ocp4-vsphere-upi-automation-vault.yml
 
 # Copy Ignition file to the Apache's ignition folder under DocumentRoot:
 cp install-dir/bootstrap.ign /var/www/html/ignition

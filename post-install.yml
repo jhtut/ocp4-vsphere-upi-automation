@@ -55,6 +55,7 @@
   - name: POSTINSTALL 2.1 | Create HTPasswd Secret
     command: oc create secret generic htpass-secret --from-file=htpasswd="{{ htpasswdpath }}" -n openshift-config
     # failed_when: "'already exists' not in result2.stderr"  # use this when run multiple times
+    ignore_errors: yes
     register: result2
     tags:
       - "2"
@@ -82,6 +83,7 @@
   - name: POSTINSTALL 3.0 | Create LDAP Secret
     command: oc create secret generic ldap-secret --from-file=htpasswd="{{ htpasswdpath }}" -n openshift-config
     # failed_when: "'already exists' not in result3.stderr"  # use this when run multiple times
+    ignore_errors: yes
     register: result3
     tags:
       - "3"
@@ -128,6 +130,7 @@
 
   - name: POSTINSTALL 5.0 | Remove generic Kubeadmin User
     command: oc delete secrets kubeadmin -n kube-system
+    ignore_errors: yes
     register: result5
     # failed_when: "'NotFound' not in result5.stderr"  # use this when run multiple times
     tags:
