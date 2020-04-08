@@ -13,4 +13,4 @@ fi
 printf "* Cluster Name: ${BUILD_LAB}\n\n"
 
 # Run Ansible post-install.yml playbook:
-ansible-playbook -e "" -e @./vars/vars-${BUILD_LAB}.yml post-install.yml --vault-password-file=ocp4-vsphere-upi-automation-vault.yml --skip-tags=6,7,19,20
+ansible-playbook -e "" -e @./vars/vars-${BUILD_LAB}.yml post-install.yml --vault-password-file=ocp4-vsphere-upi-automation-vault.yml --skip-tags=3,5,6,7,19,20
